@@ -13,16 +13,16 @@ namespace UsingBlock {
                 //e tudo que estiver dentro do bloco
                 //será executado e logo após, na saída do bloco
                 //todos os recursos serão fechados!
-                using (FileStream fs = new FileStream(path, FileMode.Open)) {
-                    //podemos usar cascatas de blocos using. 
-                    using (StreamReader sr = new StreamReader(fs)) {
-                        while (!sr.EndOfStream) {
-                            string line = sr.ReadLine();
-                            Console.WriteLine(line);
-                        }
-                    }//final do subbloco using
-                }//final do bloco using
-            }
+                //AQUI USAMOS OUTRO METODO PARA RESUMIR A ABERTURA DO ARQUIVO.
+                //USAMOS O FILE.OPENTEXT. 
+                using (StreamReader sr = File.OpenText(path)) {
+                    while (!sr.EndOfStream) {
+                        string line = sr.ReadLine();
+                        Console.WriteLine(line);
+                    }
+                }//final do subbloco using
+            }//final do bloco using
+
             catch (IOException e) {
                 Console.WriteLine("An error occured");
                 Console.WriteLine(e.Message);
